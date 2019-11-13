@@ -9,23 +9,27 @@ import java.sql.Date;
 @Entity
 @Data
 @ToString
-@Table(name = "ss_orders")
+@Table(name = "ss_orders",schema = "ss")
 public class ss_orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int O_ID;
-
-    private int P_ID;
-    private int U_ID;
-    private int FINAL_PRICE;
-    private Date DATETIME;
+    @Column(name="O_ID")
+    private int o_id;
+    @Column(name="P_ID")
+    private int p_id;
+    @Column(name="U_ID")
+    private int u_id;
+    @Column(name="FINAL_PRICE")
+    private int final_price;
+    @Column(name="DATETIME")
+    private Date datetime;
 
     public ss_orders(){}
     public ss_orders(int pid,int uid,int fprice,Date date){
-        this.P_ID = pid;
-        this.U_ID = uid;
-        this.FINAL_PRICE = fprice;
-        this.DATETIME = date;
+        this.p_id = pid;
+        this.u_id = uid;
+        this.final_price = fprice;
+        this.datetime = date;
     }
 }

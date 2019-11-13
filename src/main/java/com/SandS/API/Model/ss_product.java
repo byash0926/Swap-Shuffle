@@ -9,33 +9,40 @@ import java.sql.Date;
 @Entity
 @Data
 @ToString
-@Table(name = "ss_product")
+@Table(name = "ss_product",schema = "ss")
 public class ss_product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int P_ID;
-
-    private String P_NAME;
-
-    private int C_ID;
-    private int U_ID;
-    private String P_IMAGES;
-    private String P_DESC;
-    private int P_PRICE;
-    private String P_STATUS;
-    private Date P_DATETIME;
+    @Column(name="P_ID")
+    private int p_id;
+    @Column(name="P_NAME")
+    private String p_name;
+    @Column(name="C_ID")
+    private int c_id;
+    @Column(name="U_ID")
+    private int u_id;
+    @Column(name="P_IMAGES")
+    private String p_images;
+    @Column(name="P_DESC")
+    private String p_desc;
+    @Column(name="P_PRICE")
+    private int p_price;
+    @Column(name="P_STATUS")
+    private String p_status;
+    @Column(name="P_DATETIME")
+    private Date p_datetime;
 
     public ss_product(){}
     public ss_product(String pname,int cid,int uid, String images,String desc,int price,String status,Date date){
-        this.P_NAME = pname;
-        this.C_ID = cid;
-        this.U_ID = uid;
-        this.P_IMAGES = images;
-        this.P_DESC = desc;
-        this.P_PRICE = price;
-        this.P_STATUS = status;
-        this.P_DATETIME = date;
+        this.p_name = pname;
+        this.c_id = cid;
+        this.u_id = uid;
+        this.p_images = images;
+        this.p_desc = desc;
+        this.p_price = price;
+        this.p_status = status;
+        this.p_datetime = date;
 
     }
 }
