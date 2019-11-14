@@ -18,9 +18,9 @@ public class ss_product {
     private int p_id;
     @Column(name="P_NAME")
     private String p_name;
-    @Column(name="C_ID")
+    @JoinColumn(name = "C_ID", referencedColumnName = "C_ID")
     private int c_id;
-    @Column(name="U_ID")
+    @JoinColumn(name = "U_ID", referencedColumnName = "U_ID")
     private int u_id;
     @Column(name="P_IMAGES")
     private String p_images;
