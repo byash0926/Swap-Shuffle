@@ -24,6 +24,21 @@ public class UserCont {
 //        return userService.addUser(new ss_users("Harshvardhan", 987654321, "ojhaharsh7@gmail.com", "1234", null, null));
 //    }
 
+//    @GetMapping("/sendmail/{email}")
+//    public void sendmailTest(@PathVariable String email) {
+//        userService.sendMail(email);
+//    }
+
+    @GetMapping("/confirmation/{token}")
+    public ss_users ConfirmAccount(@PathVariable String token) {
+        return userService.findByTokenID(token);
+    }
+
+    @PostMapping(path = "/login/{user}", consumes = "appication/json")
+    public ss_users LogInUser(@RequestBody ss_users User){
+        return userService.findByEmailPass(User.getEmail(), User.getPassword());
+    }
+
     @GetMapping(path="/find/{email}")
     public ss_users findByEmail(@PathVariable String email){
         return userService.findByEmail(email);
