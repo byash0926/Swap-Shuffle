@@ -20,4 +20,6 @@ public class CategoryService {
     public List<ss_category> FindAll(){
         return categoryRepo.findAll();
     }
+    
+    
 }
