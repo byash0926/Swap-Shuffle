@@ -52,10 +52,11 @@ public class UserService {
 
     public ss_users findByEmailPass(String email,String password){
         ss_users user = findByEmail(email);
+       // System.out.println(user);
         if(user.getU_status() == true)
             return userRepo.findByEmailAndPassword(email,password);
         else
-            return addUser(user);
+            return null;
     }
 
     public boolean sendMail(ss_users user, String message, String subject) {

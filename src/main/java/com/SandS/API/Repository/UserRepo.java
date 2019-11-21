@@ -9,4 +9,5 @@ public interface UserRepo extends JpaRepository<ss_users,Integer> {
     public ss_users findByEmail(String email);
     public ss_users findByTokenID(String tokenId);
     public ss_users findByEmailAndPassword(String email,String password);
+
 }

@@ -1,9 +1,13 @@
 package com.SandS.API.Controller;
 
+import com.SandS.API.Model.forget_password;
 import com.SandS.API.Model.ss_users;
 import com.SandS.API.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("user")
@@ -34,9 +38,23 @@ public class UserCont {
         return userService.findByTokenID(token);
     }
 
-    @PostMapping(path = "/login/{user}", consumes = "appication/json")
-    public ss_users LogInUser(@RequestBody ss_users User){
-        return userService.findByEmailPass(User.getEmail(), User.getPassword());
+    @PostMapping(path = "/login/", consumes = "application/json")
+    public ResponseEntity LogInUser(@RequestBody ss_users User){
+        try {
+            //System.out.println(User);
+            ss_users user = userService.findByEmailPass(User.getEmail(), User.getPassword());
+            if(user == null) {
+                return ResponseEntity.ok("Bad Credential");
+            }
+            return ResponseEntity.ok(user);
+        }
+        catch (Exception ex) {
+            return ResponseEntity.ok("Bad Credential");
+        }
+//        if(user == null) {
+//            System.out.println("Invalid");
+//            return (ResponseEntity) ResponseEntity.badRequest();
+//        }
     }
 
     @GetMapping(path="/find/{email}")
@@ -47,5 +65,33 @@ public class UserCont {
     @PostMapping(path = "/delete/{id}", consumes = "application/json")
     public void deleteUser(@RequestBody int id){
         userService.deleteUser(id);
+    }
+
+    @GetMapping(path = "forgotpassword/{email}")
+    public ResponseEntity forgotPassword(@PathVariable String email){
+        ss_users user = findByEmail(email);
+        if(user != null){
+            user.setTokenID(UUID.randomUUID().toString());
+            String Subject = "Reset the Password";
+            String Message = "To reset your password click on the link given below.";
+            String link = "http://localhost:8080/user/forgotpassword/"+user.getTokenID();
+            userService.sendMail(user,Message,Subject);
+        }
+
+        return ResponseEntity.ok("CHECK YOUR MAIL TO CONFIRM PASSWORD");
+    }
+
+    @PostMapping(path = "forgotpassword/token/{tokenId}")
+    public ResponseEntity forgotPasswordPost(@PathVariable String tokenId, @RequestBody forget_password password){
+        ss_users user = userService.findByTokenID(tokenId);
+        if(user == null){
+            return ResponseEntity.ok("No User Found with this email");
+        }
+        if(password.getPassword().equals(password.getC_password())) {
+            user.setPassword(password.getPassword());
+            userService.addUser(user);
+            return ResponseEntity.ok("Successfully changed your Password");
+        }
+        return ResponseEntity.ok("Password doesn't match");
     }
 }
