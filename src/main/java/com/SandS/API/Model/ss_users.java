@@ -30,11 +30,13 @@ public class ss_users {
     private String tokenID;
 
     public ss_users(){}
-    public ss_users(String uname, int phno, String emailId, String password){
+    public ss_users(String uname, int phno, String emailId, String password,String tokenID){
         this.u_name = uname;
         this.email = emailId;
         this.phone_no = phno;
         this.password = password;
+        this.tokenID = tokenID;
+
     }
 
     public ss_users(String email){

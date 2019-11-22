@@ -62,9 +62,9 @@ public class UserCont {
         return userService.findByEmail(email);
     }
 
-    @PostMapping(path = "/delete/{id}", consumes = "application/json")
-    public void deleteUser(@RequestBody int id){
-        userService.deleteUser(id);
+    @PostMapping(path = "/update/", consumes = "application/json")
+    public void updateUser(@RequestBody ss_users user){
+        userService.updateUser(user);
     }
 
     @GetMapping(path = "forgotpassword/{email}")
@@ -84,7 +84,7 @@ public class UserCont {
     @PostMapping(path = "forgotpassword/token/{tokenId}")
     public ResponseEntity forgotPasswordPost(@PathVariable String tokenId, @RequestBody forget_password password){
         ss_users user = userService.findByTokenID(tokenId);
-        if(user == null){
+        if(user == null) {
             return ResponseEntity.ok("No User Found with this email");
         }
         if(password.getPassword().equals(password.getC_password())) {

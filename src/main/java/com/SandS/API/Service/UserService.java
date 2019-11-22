@@ -22,11 +22,11 @@ public class UserService {
     private JavaMailSender mailSender;
 
     public ss_users addUser(ss_users user){
-        user.setTokenID(UUID.randomUUID().toString());
-        String Subject = "Complete Your Registration";
-        String Message = "To complete your registration click on the link given below.";
-        String link = "http://localhost:8080/user/confirmation/"+user.getTokenID();
-        sendMail(user, Message+link, Subject);
+//        user.setTokenID(UUID.randomUUID().toString());
+//        String Subject = "Complete Your Registration";
+//        String Message = "To complete your registration click on the link given below.";
+//        String link = "http://localhost:8080/user/confirmation/"+user.getTokenID();
+//        sendMail(user, Message+link, Subject);
         return userRepo.save(user);
     }
 
