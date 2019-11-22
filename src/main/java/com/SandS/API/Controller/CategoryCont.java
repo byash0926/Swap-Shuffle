@@ -1,6 +1,7 @@
 package com.SandS.API.Controller;
 
 import com.SandS.API.Model.ss_category;
+import com.SandS.API.Model.ss_product;
 import com.SandS.API.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +23,13 @@ public class CategoryCont {
         return categoryService.addCategory(new ss_category(cname));
     }
 
-    @GetMapping(path="/")
+    @GetMapping(path="/findAll")
     public List<ss_category> FindAll(){
         return categoryService.FindAll();
+    }
+
+    @GetMapping(path="/{c_name}/products")
+    public List<ss_product> FindAllProducts(@PathVariable String c_name){
+        return categoryService.FindAllProducts(c_name);
     }
 }

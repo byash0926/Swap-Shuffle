@@ -1,0 +1,67 @@
+product
+
+	findProduct
+	
+		link:http://localhost:8080/SandS/product/find/1
+		1 is product id;
+		result:
+		{
+		    "p_id": 1,
+		    "p_name": "sadfwa",
+		    "p_desc": "asdajsdha\n",
+		    "p_price": 23.0,
+		    "p_status": true,
+		    "p_datetime": null,
+		    "order": null,
+		    "requestList": []
+		}
+
+
+Category
+
+	find all category
+	
+		link:http://localhost:8080/SandS/category/findAll
+		result:
+		[
+			{
+				"c_id": 1,
+				"c_name": "abcd",
+				"productList": [
+					{
+						"p_id": 1,
+						"p_name": "sadfwa",
+						"p_desc": "asdajsdha\n",
+						"p_price": 23.0,
+						"p_status": true,
+						"p_datetime": null,
+						"order": null,
+						"requestList": []
+					}
+				]
+			},
+			{
+				"c_id": 2,
+				"c_name": "abcd123",
+				"productList": []
+			}
+		]
+	find all product for same category
+		
+		link:http://localhost:8080/SandS/category/abcd/products
+		abcd is category name
+		
+		result: product list
+			[
+				{
+					"p_id": 1,
+					"p_name": "sadfwa",
+					"p_desc": "asdajsdha\n",
+					"p_price": 23.0,
+					"p_status": true,
+					"p_datetime": null,
+					"order": null,
+					"requestList": []
+				}
+			]
+		

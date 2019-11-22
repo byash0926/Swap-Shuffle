@@ -59,6 +59,17 @@ public class UserService {
             return null;
     }
 
+    public ss_users validateUser(String email, String password)
+    {
+
+        ss_users user=findByEmail(email);
+        if(user.getPassword().equals(password))
+        {
+            return user;
+        }
+        else return null;
+    }
+
     public boolean sendMail(ss_users user, String message, String subject) {
         try {
             SimpleMailMessage email = new SimpleMailMessage();
